@@ -1,15 +1,24 @@
 {
   "name": "imooc",
   "version": "1.0.0",
-  "description": "",
+  "description": "A demo project about Node ",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "jarbinup",
   "license": "ISC",
   "dependencies": {
+    "bower": "^1.8.0",
     "moment": "^2.17.1",
     "mongoose": "^4.8.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "htts://github.com/jarbinup/imooc"
+  },
+  "keywords": [
+    "node"
+  ]
 }
