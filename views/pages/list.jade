@@ -6,14 +6,14 @@ block content
       table.table.table-hover.table-bordered
         thead
           tr
-            th daingyingmingzi
-            th daoyan
-            th guojia
-            th shangyingnianfen
-            //-th lurushjian
-            th chakan
-            th gengxin
-            th shanchu
+            th 电影名字 
+            th 导演 
+            th 国家 
+            th 上映年份 
+            //-th 录入时间 
+            th 查看 
+            th 更新 
+            th 删除
         tbody
           each item in movies
             tr(class="item-id-#{item._id}")
@@ -22,7 +22,7 @@ block content
               td #{item.country}
               td #{item.year}
               //-td #{(item.meta.createdAt).format('MM/DD/YYYY')}
-              td: a(target="_blank", href="../movie/#{item._id}") chakan
-              td: a(target="_blank", href="../admin/update/movie/#{item._id}") xiugai
+              td: a(target="_blank", href="../movie/#{item._id}") 查看 
+              td: a(target="_blank", href="../admin/update/movie/#{item._id}") 更新
               td
-                button.btn.btn-danger.del(type="button", data-id="#(item._id)") shanchu 
+                button.btn.btn-danger.del(type="button", data-id="#(item._id)") 删除 
