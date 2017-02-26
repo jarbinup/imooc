@@ -1,0 +1,24 @@
+{
+  "name": "imooc",
+  "description": "A demo project about Node",
+  "main": "app.js",
+  "authors": [
+    "jarbinup"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
