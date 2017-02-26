@@ -12,12 +12,17 @@
     "body-parser": "^1.16.1",
     "bower": "^1.8.0",
     "express": "^4.14.1",
+    "grunt": "^1.0.1",
     "jade": "^1.11.0",
     "moment": "^2.17.1",
     "mongoose": "^4.8.4",
     "underscore": "^1.8.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt-concurrent": "^2.3.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nodemon": "^0.4.2"
+  },
   "repository": {
     "type": "git",
     "url": "htts://github.com/jarbinup/imooc"
