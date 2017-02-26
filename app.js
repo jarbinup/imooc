@@ -1,18 +1,19 @@
 var express = require('express')
 var path = require('path')
 var mongoose = require('mongoose')
-var _ = require('underscore')
 var Movie = require('./models/movie')
+// output format form data
 var bodyParser = require('body-parser')
+var _ = require('underscore')
 var port = process.env.PORT || 3000 
 var app = express()
-
-mongoose.connect('mongodb://localhost/imooc')
+app.locals.moment = require('moment')
+mongoose.connect('mongodb://localhost/imooctest')
 
 app.set('views', './views/pages')
 app.set('view engine', 'jade')
 app.use(bodyParser())
-app.use(express.static(path.join(__dirname, 'bower_components')))
+app.use(express.static(path.join(__dirname, 'public')))
 app.listen(port)
 
 console.log('imooc started on port: ' + port)
@@ -24,7 +25,7 @@ app.get('/', function(req, res){
 			console.log(err)
 		}
 		res.render('index', {
-			title: 'shouye',
+			title: '首页',
 	      movies: movies
 		})
 	})
@@ -36,26 +37,25 @@ app.get('/movie/:id', function(req, res){
 
 	Movie.findById(id, function(err, movie){
 		res.render('detail', {
-			title: 'imooc' + movie.title,
+			title: 'imooc详情页',
 			movie: movie
 		})
 	})
 })
 
-
 // admin page
 app.get('/admin/movie', function(req, res){
 	res.render('admin', {
-		title: 'imooc luruye',
+		title: 'imooc 录入页',
 		movie: {
-			title: '',
 			doctor: '',
 			country: '',
+			title: '',
 			year: '',
 			poster: '',
+			language: '',
 			flash: '',
-			summary: '',
-			language: ''
+			summary: ''
 		}
 	})
 })
@@ -67,13 +67,12 @@ app.get('/admin/update/:id', function(req, res){
 	if(id) {
 		Movie.findById(id, function(err, movie) {
 			res.render('admin', {
-				title: 'imooc udate',
+				title: movie.title,
 				movie: movie
 			})
 		})
 	}
 })
-
 
 // admin post movie
 app.post('/admin/movie/new',function(req,res){
@@ -81,15 +80,16 @@ app.post('/admin/movie/new',function(req,res){
 	var movieObj = req.body.movie
 
 	var _movie
-
+  console.log('111111', id)
+  console.log('222222', movieObj)
 	if(id !=='undefined'){
+		console.log('33333333')
 		Movie.findById(id,function(err,movie){
 			if(err){
 				console.log(err)
 			}
 
-			_movie = _.extend(movie,movieObj)
-			console.log('22222222', _movie)
+			_movie = _.extend(movie, movieObj)
 			_movie.save(function(err,movie){
 				if(err){
 					console.log(err)
@@ -100,15 +100,16 @@ app.post('/admin/movie/new',function(req,res){
 
 		})
 	}else{
+		console.log('4444444')
 		_movie = new Movie({
-			doctor:movieObj.doctor,
-			title:movieObj.title,
-			country:movieObj.country,
-			language:movieObj.language,
-			year:movieObj.year,
-			poster:movieObj.poster,
-			summary:movieObj.summary,
-			flash:movieObj.flash,
+			doctor: movieObj.doctor,
+			title: movieObj.title,
+			country: movieObj.country,
+			language: movieObj.language,
+			year: movieObj.year,
+			poster: movieObj.poster,
+			summary: movieObj.summary,
+			flash: movieObj.flash
 		})
 
 		_movie.save(function(err,movie){
@@ -120,6 +121,7 @@ app.post('/admin/movie/new',function(req,res){
 			})
 	}
 })
+
 // list page
 app.get('/admin/list', function(req, res){
 	Movie.fetch(function(err, movies) {
@@ -127,7 +129,7 @@ app.get('/admin/list', function(req, res){
 			console.log(err)
 		}
 		res.render('list', {
-			title: 'imooc liebiaoye',
+			title: 'imooc 列表页',
 			movies: movies
 		})
 	})
