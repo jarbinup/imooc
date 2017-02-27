@@ -2,6 +2,7 @@ var express = require('express')
 var path = require('path')
 var mongoose = require('mongoose')
 var Movie = require('./models/movie')
+var User = require('./models/user')
 // output format form data
 var bodyParser = require('body-parser')
 var _ = require('underscore')
@@ -31,6 +32,76 @@ app.get('/', function(req, res){
 	})
 })
 
+//signup
+app.post('/user/signup', function(req, res){
+	var _user = req.body.user
+
+	User.findOne({name:_user.name}, function(err, user){
+		if (err) {
+			console.log(err)
+		}
+
+		if(user) {
+			res.redirect('/')
+		} else {
+			var user = new User(_user)
+
+			user.save(function(err, user){
+				if (err) {
+					console.log(err)
+				}
+
+				console.log('hasheduser', user)
+				res.redirect('/admin/userlist')
+			})
+		}
+
+	})
+})
+
+// signin pages
+app.post('/user/signin', function(req, res){
+	var _user = req.body.user
+	var name = _user.name
+	var password = _user.password
+
+	User.findOne({name: name}, function(err, user) {
+		if (err) {
+			console.log(err)
+		}
+
+		if (!user) {
+			return res.redirect('/')
+		}
+
+		user.comparePassword(password, function(err, isMatch){
+			if(err){
+				console.log(err)
+			}
+
+			if(isMatch){
+				return res.redirect('/')
+			} else{
+				console.log('password is not matched')
+			}
+		})
+	})
+
+})
+
+// userlist page
+app.get('/admin/userlist', function(req, res){
+	User.fetch(function(err, users) {
+		if (err) {
+			console.log(err)
+		}
+		res.render('userlist', {
+			title: 'user 列表页',
+			users: users
+		})
+	})
+	
+})
 // detail page
 app.get('/movie/:id', function(req, res){
 	var id = req.params.id
@@ -80,10 +151,7 @@ app.post('/admin/movie/new',function(req,res){
 	var movieObj = req.body.movie
 
 	var _movie
-  console.log('111111', id)
-  console.log('222222', movieObj)
 	if(id !=='undefined'){
-		console.log('33333333')
 		Movie.findById(id,function(err,movie){
 			if(err){
 				console.log(err)
@@ -100,7 +168,6 @@ app.post('/admin/movie/new',function(req,res){
 
 		})
 	}else{
-		console.log('4444444')
 		_movie = new Movie({
 			doctor: movieObj.doctor,
 			title: movieObj.title,
