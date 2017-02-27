@@ -2,4 +2,42 @@
 	.row
 		.page-header
 			h1 #{title}
-			small 勤字功夫，第一贵早起，第二贵有恒，第三天天读书。此三事者，终身事之。
+			small 勤字功夫，第一贵早起，第二贵有恒，第三贵天天读书。此三事者，终身事之。
+.navbar.navbar-default.navbar-fixed-bottom
+	.container
+		.navbar-header
+			a.navbar-brand(href="/") 勤字功夫，第一贵早起，第二贵有恒，第三贵天天读书。此三事者，终身事之。
+		p.navbar-text.navbar-right
+			a.navbar-link(href="#", data-toggle="modal", data-target="#signupModal") signup
+			span &nbsp;| &nbsp;
+			a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") signin
+#signupModal.modal.fade
+	.modal-dialog
+		.modal-content
+			form(method="POST", action="/user/signup")
+				.modal-header signup
+				.modal-body
+					.form-group
+						label(for="signupName") username
+						input#signupName.form-control(name="user[name]", type="text")
+					.form-group
+						label(for="signupPassword") password
+						input#signupPassword.form-control(name="user[password]", type="password")
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") cancel
+					button.btn.btn-success(type="submit") submit
+#signinModal.modal.fade
+	.modal-dialog
+		.modal-content
+			form(method="POST", action="/user/signin")
+				.modal-header signin
+				.modal-body
+					.form-group
+						label(for="signinName") username
+						input#signinName.form-control(name="user[name]", type="text")
+					.form-group
+						label(for="signinPassword") password
+						input#signinPassword.form-control(name="user[password]", type="password")
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") cancel
+					button.btn.btn-success(type="submit") submit
