@@ -1,14 +1,14 @@
 var express = require('express')
 var path = require('path')
 var mongoose = require('mongoose')
-// module for persistence session
-var mongoStore = require('connect-mongo')
 var Movie = require('./models/movie')
 var User = require('./models/user')
 // output format form data
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var session = require('express-session')
+// module for persistence session
+var mongoStore = require('connect-mongo')(session)
 var _ = require('underscore')
 var port = process.env.PORT || 3000 
 var app = express()
@@ -19,6 +19,8 @@ mongoose.connect(dbUrl)
 app.set('views', './views/pages')
 app.set('view engine', 'jade')
 app.use(cookieParser())
+app.use(bodyParser())
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({	
 	secret: 'imooc',
 	store: new mongoStore({
@@ -26,10 +28,8 @@ app.use(session({
 		collection: 'sessions'
 	})
 }))
-app.use(bodyParser())
-app.use(express.static(path.join(__dirname, 'public')))
-app.listen(port)
 
+app.listen(port)
 console.log('imooc started on port: ' + port)
 
 // index page
