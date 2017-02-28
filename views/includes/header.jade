@@ -7,10 +7,16 @@
 	.container
 		.navbar-header
 			a.navbar-brand(href="/") 勤字功夫，第一贵早起，第二贵有恒，第三贵天天读书。此三事者，终身事之。
-		p.navbar-text.navbar-right
-			a.navbar-link(href="#", data-toggle="modal", data-target="#signupModal") signup
-			span &nbsp;| &nbsp;
-			a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") signin
+		if user
+			p.navbar-text.navbar-right
+				span welcome, #{user.name}
+				span &nbsp;| &nbsp;
+				a.navbar-link(href="/logout") logout
+		else
+			p.navbar-text.navbar-right
+				a.navbar-link(href="#", data-toggle="modal", data-target="#signupModal") signup
+				span &nbsp;| &nbsp;
+				a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") signin
 #signupModal.modal.fade
 	.modal-dialog
 		.modal-content
