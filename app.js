@@ -1,11 +1,9 @@
 var express = require('express')
 var path = require('path')
 var mongoose = require('mongoose')
-// output format form data
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var session = require('express-session')
-// module for persistence session
 var mongoStore = require('connect-mongo')(session)
 var logger = require('express-logger')
 var port = process.env.PORT || 3000 
@@ -15,7 +13,7 @@ var dbUrl = 'mongodb://localhost/imooctest'
 mongoose.connect(dbUrl)
 
 app.locals.moment = require('moment')
-app.set('views', './views/pages')
+app.set('views', './app/views/pages')
 app.set('view engine', 'jade')
 app.use(cookieParser())
 app.use(bodyParser())
@@ -33,7 +31,7 @@ app.use(function(req, res, next){
 	if (_user) {
 		app.locals.user = _user
 	}
-	return next()
+	next()
 })
 
 if ('development' === app.get('env')) {
