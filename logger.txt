@@ -1,0 +1,8 @@
+logger.txt::ffff:127.0.0.1 - - [Wed, 01 Mar 2017 01:11:13 GMT] "GET /favicon.ico HTTP/1.1" 404 24 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
+::ffff:127.0.0.1 - - [Wed, 01 Mar 2017 01:11:16 GMT] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
+::ffff:127.0.0.1 - - [Wed, 01 Mar 2017 01:11:33 GMT] "POST /user/signup HTTP/1.1" 302 74 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
+::ffff:127.0.0.1 - - [Wed, 01 Mar 2017 01:11:33 GMT] "GET /admin/userlist HTTP/1.1" 200 6534 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
+::ffff:127.0.0.1 - - [Wed, 01 Mar 2017 01:12:00 GMT] "POST /user/signin HTTP/1.1" 302 46 "http://localhost:3000/admin/userlist" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
+::ffff:127.0.0.1 - - [Wed, 01 Mar 2017 01:12:00 GMT] "GET / HTTP/1.1" 200 4498 "http://localhost:3000/admin/userlist" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
+::ffff:127.0.0.1 - - [Wed, 01 Mar 2017 01:12:06 GMT] "GET /logout HTTP/1.1" 302 46 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
+::ffff:127.0.0.1 - - [Wed, 01 Mar 2017 01:12:06 GMT] "GET / HTTP/1.1" 200 4600 "http://localhost:3000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"

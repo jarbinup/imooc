@@ -7,12 +7,14 @@ var cookieParser = require('cookie-parser')
 var session = require('express-session')
 // module for persistence session
 var mongoStore = require('connect-mongo')(session)
+var logger = require('express-logger')
 var port = process.env.PORT || 3000 
 var app = express()
 var dbUrl = 'mongodb://localhost/imooctest'
-app.locals.moment = require('moment')
+
 mongoose.connect(dbUrl)
 
+app.locals.moment = require('moment')
 app.set('views', './views/pages')
 app.set('view engine', 'jade')
 app.use(cookieParser())
@@ -25,10 +27,6 @@ app.use(session({
 		collection: 'sessions'
 	})
 }))
-
-app.listen(port)
-console.log('imooc started on port: ' + port)
-
 // pre handle user
 app.use(function(req, res, next){
 	var _user = req.session.user
@@ -38,4 +36,15 @@ app.use(function(req, res, next){
 	return next()
 })
 
+if ('development' === app.get('env')) {
+  app.set('showStackError', true)
+  app.use(logger({
+  	path: 'logger.txt'
+  }))
+  app.locals.pretty = true
+  mongoose.set('debug', true)
+}
 require('./config/routes')(app)
+
+app.listen(port)
+console.log('imooc started on port: ' + port)
